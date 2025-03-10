@@ -3,29 +3,53 @@
 ## Étapes d'expérimentation
 
 1. **Ajouter un nouveau PV (Physical Volume) au VG (Volume Group)** :
-   - Utilisez la commande `pvcreate` pour transformer une partition ou un disque en volume physique.
-   - Associez ce PV au VG existant avec `vgextend`.
+   ```bash
+   sudo pvcreate /dev/sdX
+   sudo vgextend mon_vg /dev/sdX
+Créer un nouveau VG à partir d'un ou plusieurs PV :
+bash
+sudo vgcreate mon_nouveau_vg /dev/sdX /dev/sdY
 
-2. **Créer un nouveau VG à partir d'un ou plusieurs PV** :
-   - Regroupez plusieurs PV pour créer un VG en utilisant `vgcreate`.
+Ajouter un nouveau LV (Logical Volume) :
+Créez le LV :
 
-3. **Ajouter un nouveau LV (Logical Volume)** :
-   - Créez un LV avec `lvcreate`.
-   - Formatez-le avec un système de fichier comme ext4 (via `mkfs.ext4`).
-   - Montez-le au démarrage en configurant `/etc/fstab`.
+bash
+sudo lvcreate -L 10G -n mon_lv mon_vg
+Formatez-le avec ext4 :
 
-4. **Convertir ou créer un LV en RAID 1 (mirroring) ou RAID 0 (stripping)** :
-   - Configurez le RAID avec `lvconvert`.
+bash
+sudo mkfs.ext4 /dev/mon_vg/mon_lv
+Montez-le temporairement :
 
-5. **Créer un snapshot d'un LV** :
-   - Capturez l'état actuel d'un volume logique avec `lvcreate --snapshot`.
-   - Montez ce snapshot pour accéder à une copie.
+bash
+sudo mkdir /mnt/mon_lv
+sudo mount /dev/mon_vg/mon_lv /mnt/mon_lv
+Ajoutez-le au démarrage dans /etc/fstab :
 
-6. **Supprimer un LV inutile** :
-   - Démontez le volume logique, puis supprimez-le avec `lvremove`.
+bash
+echo "/dev/mon_vg/mon_lv /mnt/mon_lv ext4 defaults 0 2" | sudo tee -a /etc/fstab
+Convertir ou créer un LV en RAID 1 (mirroring) ou RAID 0 (stripping) :
 
-## Astuces
-- Toutes ces opérations nécessitent les droits administratifs (`root`).
-- Si vous utilisez une machine virtuelle pour vos expérimentations, créez un snapshot de la VM avant de commencer afin de revenir à l'état initial en cas de problème.
+RAID 1 (mirroring) :
 
-Ces exercices sont parfaits pour explorer les nombreuses fonctionnalités de LVM et tester votre maîtrise des commandes liées au stockage sous Linux. N'hésitez pas à demander plus de détails sur une commande ou étape particulière !
+bash
+sudo lvconvert --type raid1 -m 1 mon_vg/mon_lv
+RAID 0 (stripping) :
+
+bash
+sudo lvconvert --type raid0 mon_vg/mon_lv
+Créer un snapshot d'un LV :
+
+bash
+sudo lvcreate --size 1G --snapshot --name snapshot_lv /dev/mon_vg/mon_lv
+sudo mount /dev/mon_vg/snapshot_lv /mnt/snapshot
+Supprimer un LV inutile :
+
+Démontez d'abord le volume :
+
+bash
+sudo umount /mnt/mon_lv
+Supprimez le LV :
+
+bash
+sudo lvremove /dev/mon_vg/mon_lv
