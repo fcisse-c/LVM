@@ -29,7 +29,32 @@ Vérification :
 
 ![image](https://github.com/user-attachments/assets/3d63c3db-3f46-4742-a5d4-8f29905a95ec)
 
+3. Il y a bien création d'un dossier home-snap et montage du snapshot dans ce dossier
+   🔹 Créer le point de montage
+ ```bash
+sudo mkdir /home-snap
+ ```
 
+🔹 Monter le snapshot
+ ```bash
+sudo mount /dev/debian-vg/home-snap /home-snap
+ ```
+
+
+🔹 Vérifier les systèmes de fichiers montés
+ ```bash
+df -h
+ ```
+
+![image](https://github.com/user-attachments/assets/cb804a66-ed27-4e4b-ae10-b53724aaa3ff)
+
+
+🔹 Comparer le contenu de /home et /home-snap
+bash
+
+5. L'affichage du contenu de home-snap affiche un contenu identique à /home
+6. L'affichage des systèmes de fichiers actuellement montés n'affiche plus /home-snap
+7. L'affichage des LV n'affiche plus le snapshot et le LV home n'est plus la source d'aucun snapshot
 
 
 
