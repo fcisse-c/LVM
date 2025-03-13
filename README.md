@@ -12,14 +12,14 @@ Ajoutez un second disque virtuel /dev/sdb à votre machine.
 
 1. Ajoute un nouveau disque à la machine et ajoute le au groupe de volume debian-vg pour au moins doubler l'espace du groupe de volume :
 🔹Initialiser le disque en Physical Volume (PV)
- ![image](https://github.com/user-attachments/assets/e4b5736f-b0fb-4642-816e-275181d3994d)
+   ![image](https://github.com/user-attachments/assets/e4b5736f-b0fb-4642-816e-275181d3994d)
 
 🔹 Étendre le Volume Group (debianserver-vg)
- ![image](https://github.com/user-attachments/assets/9c9ed6de-8baa-4121-8098-a062c191c785)
+   ![image](https://github.com/user-attachments/assets/9c9ed6de-8baa-4121-8098-a062c191c785)
 
 
 2. La création d'un snapshot du LV home
-   ![image](https://github.com/user-attachments/assets/594a11c6-45dd-4f96-810d-3366ab3beaca)
+  
 
 
 
