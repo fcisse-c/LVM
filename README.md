@@ -48,13 +48,30 @@ df -h
 
 ![image](https://github.com/user-attachments/assets/cb804a66-ed27-4e4b-ae10-b53724aaa3ff)
 
+4. L'affichage du contenu de /home-snap affiche un contenu identique à /home
 
-🔹 Comparer le contenu de /home et /home-snap
-bash
+![image](https://github.com/user-attachments/assets/31ff8da1-081f-4936-9a4e-0712198d100b)
 
-5. L'affichage du contenu de home-snap affiche un contenu identique à /home
-6. L'affichage des systèmes de fichiers actuellement montés n'affiche plus /home-snap
-7. L'affichage des LV n'affiche plus le snapshot et le LV home n'est plus la source d'aucun snapshot
+
+5. L'affichage des systèmes de fichiers actuellement montés n'affiche plus /home-snap
+   🔹 Démonter /home-snap
+ ```bash
+sudo umount /home-snap
+ ```
+
+Vérification :
+ ```bash
+df -h
+ ```
+![image](https://github.com/user-attachments/assets/d2bfb7fa-aa03-438f-9a74-7b164a8815a4)
+
+6. L'affichage des LV n'affiche plus le snapshot et le LV home n'est plus la source d'aucun snapshot
+
+ ![image](https://github.com/user-attachments/assets/c2d7a545-b2d8-4a9b-b099-4eab9de80fce)
+
+Vérification :
+
+![image](https://github.com/user-attachments/assets/6488a120-955e-4b21-b60a-291d8a753057)
 
 
 
