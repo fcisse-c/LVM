@@ -6,7 +6,7 @@ Ajoutez un second disque virtuel /dev/sdb à votre machine.
 
    ```bash
   sudo pvcreate /dev/sdb
-  ```
+   ```
 
 
 
