@@ -22,9 +22,11 @@ Ajoutez un second disque virtuel /dev/sdb à votre machine.
 
 
 2. La création d'un snapshot du LV home
+   
 ![image](https://github.com/user-attachments/assets/5cb300c8-1725-4c73-ba16-654b031a957e)
 
 Vérification :
+
 ![image](https://github.com/user-attachments/assets/3d63c3db-3f46-4742-a5d4-8f29905a95ec)
 
 
